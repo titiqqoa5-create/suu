@@ -91,14 +91,6 @@ document.addEventListener("DOMContentLoaded", function() {
       listDiv.appendChild(div);
       if(w.weapon === "砲兵" || w.weapon === "ロケット砲") hasArtillery = true;
     });
-    // 砲撃チェックを1行下に表示
-    if(hasArtillery){
-      artilleryContainer.style.display = "block";
-      artilleryContainer.style.marginTop = "8px"; // 下に1行分の余白
-    } else {
-      artilleryContainer.style.display = "none";
-    }
-
     listDiv.querySelectorAll("button").forEach(btn=>{
       btn.addEventListener("click", function(){
         selectedWeapons.splice(Number(this.dataset.index),1);
