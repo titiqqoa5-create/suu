@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  // 兵種IDを付与して管理
   const categories = [
     {id: 'cat1', name: '歩兵'},
     {id: 'cat2', name: '軍需品'},
@@ -8,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
     {id: 'cat4', name: '秘密'}
   ];
 
-  // 兵器をIDベースで紐付け
   const weaponsByCategoryId = {
     cat1: [{id:'w1', name:'歩兵'}],
     cat2: [{id:'w2', name:'砲兵'}],
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
     cat4: [{id:'w4', name:'ロケット砲'}]
   };
 
-  // 兵器ステータス（名前ベース）
   const weaponStats = {
     歩兵: {1:{attack:{non:4,light:2,heavy:1.5},defense:{non:6,light:3,heavy:2.3}},2:{attack:{non:4,light:2,heavy:1.5},defense:{non:6,light:3,heavy:2.3}},3:{attack:{non:5.5,light:2.7,heavy:2},defense:{non:8.3,light:4.1,heavy:3}},4:{attack:{non:7,light:4,heavy:3},defense:{non:10.5,light:6,heavy:4.5}},5:{attack:{non:9,light:5,heavy:4},defense:{non:13.5,light:7.5,heavy:6}},6:{attack:{non:12,light:7,heavy:5.3},defense:{non:18,light:10.5,heavy:8}}},
     砲兵: {1:{attack:{non:1.5,light:2.7,heavy:2},defense:{non:0.4,light:0.7,heavy:0.5}},2:{attack:{non:2,light:4,heavy:3},defense:{non:0.5,light:1,heavy:0.8}},3:{attack:{non:2.8,light:5.5,heavy:4},defense:{non:0.7,light:1.4,heavy:1}},4:{attack:{non:3.8,light:0.9,heavy:7.5},defense:{non:0.9,light:1.9,heavy:1.4}},5:{attack:{non:5,light:10.3,heavy:7.5},defense:{non:1.3,light:2.6,heavy:1.9}}},
@@ -34,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let selectedWeapons = [];
 
-  // 兵種セレクト初期化
   function initCategorySelect() {
     categories.forEach(c=>{
       const opt = document.createElement("option");
@@ -42,9 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
       opt.textContent = c.name;
       categorySelect.appendChild(opt);
     });
+
+    const modeSelect = document.getElementById("mode");
+    modeSelect.innerHTML = `<option value="attack">攻撃</option><option value="defense">防御</option>`;
   }
 
-  // 兵器更新（兵種IDベース）
   function updateWeapons() {
     const catId = categorySelect.value;
     weaponSelect.innerHTML = "";
@@ -57,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateLevelOptions();
   }
 
-  // レベル更新
   function updateLevelOptions() {
     const weapon = weaponSelect.value;
     if(!weaponStats[weapon]) return;
