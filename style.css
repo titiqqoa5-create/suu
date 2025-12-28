@@ -5,8 +5,8 @@ body {
 }
 
 select, input, button {
-  width: 100%;       /* フル幅 */
-  font-size: 18px;   /* タッチしやすい文字サイズ */
+  width: 100%;       
+  font-size: 18px;   
   padding: 12px;
   margin: 8px 0;
   box-sizing: border-box;
