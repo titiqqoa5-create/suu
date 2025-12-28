@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="style.css">
+
+<h2>攻撃 / 防御</h2>
+<select id="mode">
+  <option value="attack">攻撃</option>
+  <option value="defense">防御</option>
+</select>
+
+<h2>兵器選択</h2>
+<select id="category"></select>
+<select id="weapon"></select>
+
+<input type="number" id="count" placeholder="数" min="1" value="1">
+<select id="level"></select>
+
+<button id="add">追加</button>
+
+<h3>追加兵器</h3>
+<div id="list"></div>
+
+<button id="calc">計算</button>
+<h3>結果</h3>
+<div id="result"></div>
+
+<!-- JSを分離 -->
+<script src="script.js"></script>
