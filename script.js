@@ -28,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const calcBtn = document.getElementById("calc");
   const listDiv = document.getElementById("list");
   const resultDiv = document.getElementById("result");
+  const artilleryContainer = document.getElementById("artillery-container");
+  const artilleryOnly = document.getElementById("artilleryOnly");
+  const warningDiv = document.getElementById("warning");
 
   let selectedWeapons = [];
 
@@ -80,13 +83,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function renderList(){
     listDiv.innerHTML = "";
+    let hasArtillery = false;
     selectedWeapons.forEach((w,i)=>{
       const div = document.createElement("div");
       div.className = "weapon";
       const catName = categories.find(c=>c.id===w.categoryId).name;
       div.innerHTML = `${catName} / ${w.weapon} 数:${w.count} Lv:${w.level} <button data-index="${i}">削除</button>`;
       listDiv.appendChild(div);
+      if(w.weapon === "砲兵" || w.weapon === "ロケット砲") hasArtillery = true;
     });
+    artilleryContainer.style.display = hasArtillery ? "block" : "none";
+
     listDiv.querySelectorAll("button").forEach(btn=>{
       btn.addEventListener("click", function(){
         selectedWeapons.splice(Number(this.dataset.index),1);
@@ -108,7 +115,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
   calcBtn.addEventListener("click", function(){
     const mode = document.getElementById("mode").value;
-    const res = calculate(selectedWeapons, mode);
+    let weaponsToCalc = selectedWeapons;
+    
+    if(artilleryOnly.checked){
+      weaponsToCalc = selectedWeapons.filter(w => w.weapon === "砲兵" || w.weapon === "ロケット砲");
+      warningDiv.style.display = "block"; // 忠告文表示
+    } else {
+      warningDiv.style.display = "none";
+    }
+
+    const res = calculate(weaponsToCalc, mode);
     resultDiv.innerHTML = `非装甲: ${res.non.toFixed(1)}<br>軽装甲: ${res.light.toFixed(1)}<br>重装甲: ${res.heavy.toFixed(1)}`;
   });
 
