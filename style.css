@@ -1,9 +1,28 @@
-body { font-family: sans-serif; padding: 20px; }
+body { 
+  font-family: sans-serif; 
+  padding: 20px; 
+  font-size: 18px; 
+}
+
+select, input, button {
+  width: 100%;       /* フル幅 */
+  font-size: 18px;   /* タッチしやすい文字サイズ */
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
 
 .weapon {
   border: 1px solid #ccc;
-  padding: 8px;
-  margin: 6px 0;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 16px;
 }
 
-button { margin-left: 6px; }
+button { cursor: pointer; }
+
+@media screen and (max-width: 480px) {
+  body { padding: 10px; font-size: 16px; }
+  select, input, button { font-size: 16px; padding: 10px; }
+  .weapon { font-size: 14px; padding: 10px; }
+}
