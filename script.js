@@ -91,7 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
       listDiv.appendChild(div);
       if(w.weapon === "砲兵" || w.weapon === "ロケット砲") hasArtillery = true;
     });
-    artilleryContainer.style.display = hasArtillery ? "block" : "none";
+
+    // 砲撃チェックボックスと同じ行に表示
+    artilleryContainer.style.display = hasArtillery ? "flex" : "none";
+    artilleryContainer.style.alignItems = "center"; // 横並び
+    artilleryContainer.style.gap = "10px";
 
     listDiv.querySelectorAll("button").forEach(btn=>{
       btn.addEventListener("click", function(){
@@ -116,11 +120,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const mode = document.getElementById("mode").value;
     let weaponsToCalc = selectedWeapons;
 
-    // 砲撃チェックONの場合、警告を表示
     if(artilleryOnly.checked){
       if(selectedWeapons.some(w => w.weapon === "砲兵" || w.weapon === "ロケット砲")){
         if(!confirm("砲兵とロケット砲の攻撃値しか出ません。よろしいですか？")) {
-          return; // キャンセルなら計算中止
+          return;
         }
         weaponsToCalc = selectedWeapons.filter(w => w.weapon === "砲兵" || w.weapon === "ロケット砲");
       } else {
