@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const resultDiv = document.getElementById("result");
   const artilleryContainer = document.getElementById("artillery-container");
   const artilleryOnly = document.getElementById("artilleryOnly");
-  const warningDiv = document.getElementById("warning");
 
   let selectedWeapons = [];
 
@@ -116,12 +115,17 @@ document.addEventListener("DOMContentLoaded", function() {
   calcBtn.addEventListener("click", function(){
     const mode = document.getElementById("mode").value;
     let weaponsToCalc = selectedWeapons;
-    
+
+    // 砲撃チェックONの場合、警告を表示
     if(artilleryOnly.checked){
-      weaponsToCalc = selectedWeapons.filter(w => w.weapon === "砲兵" || w.weapon === "ロケット砲");
-      warningDiv.style.display = "block"; // 忠告文表示
-    } else {
-      warningDiv.style.display = "none";
+      if(selectedWeapons.some(w => w.weapon === "砲兵" || w.weapon === "ロケット砲")){
+        if(!confirm("砲兵とロケット砲の攻撃値しか出ません。よろしいですか？")) {
+          return; // キャンセルなら計算中止
+        }
+        weaponsToCalc = selectedWeapons.filter(w => w.weapon === "砲兵" || w.weapon === "ロケット砲");
+      } else {
+        alert("砲兵またはロケット砲がありません。全兵器を計算します。");
+      }
     }
 
     const res = calculate(weaponsToCalc, mode);
