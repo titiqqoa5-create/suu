@@ -20,16 +20,14 @@
 
 <button id="add">追加</button>
 
-<!-- 追加兵器一覧 -->
 <h3>追加兵器</h3>
 <div id="list"></div>
 
-<!-- 砲撃チェックを追加兵器一覧の下に表示 -->
-<div id="artillery-container" style="display:none; margin-top:8px;">
+<!-- 砲撃チェックと計算ボタンを同じ行に表示 -->
+<div id="artillery-container" style="display:none; margin-top:8px; display:flex; align-items:center; gap:10px;">
   <label><input type="checkbox" id="artilleryOnly"> 砲撃のみ計算</label>
+  <button id="calc">計算</button>
 </div>
-
-<button id="calc">計算</button>
 
 <h3>結果</h3>
 <div id="result"></div>
