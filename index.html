@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h2>防御計算機</h2>
+<h2>攻撃 / 防御</h2>
 <select id="mode"></select>
 
 <h2>兵器選択</h2>
@@ -20,12 +20,20 @@
 
 <button id="add">追加</button>
 
+<!-- 砲撃チェック -->
+<div id="artillery-container" style="display:none; margin:8px 0;">
+  <label><input type="checkbox" id="artilleryOnly"> 砲撃のみ計算</label>
+</div>
+
 <h3>追加兵器</h3>
 <div id="list"></div>
 
 <button id="calc">計算</button>
 <h3>結果</h3>
 <div id="result"></div>
+
+<!-- 忠告文 -->
+<div id="warning" style="color:red; display:none; margin-top:10px;">砲兵とロケット砲の攻撃値しか出ません</div>
 
 <script src="script.js"></script>
 </body>
